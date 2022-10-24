@@ -5,6 +5,8 @@ import time
 
 PROCNAME = "Temtem.exe"
 
+pid = None
+
 for proc in psutil.process_iter():
     if proc.name() == PROCNAME:
         pid = proc.pid

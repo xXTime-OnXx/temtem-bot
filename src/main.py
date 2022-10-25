@@ -1,5 +1,3 @@
-import time
-
 from windowmanager import WindowManager
 from bot import TemtemBot
 from command.runcircle import RunCircle
@@ -15,7 +13,3 @@ temtem_bot = TemtemBot()
 
 run_circle_command = RunCircle()
 temtem_bot.execute(run_circle_command)
-
-# Game loop (update states, a.o.s)
-while True:
-    time.sleep(5)

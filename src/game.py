@@ -7,3 +7,4 @@ class Game:
 
     def __init__(self):
         self._status = GameStatus.OPEN_WORLD
+        self._mini_map = None

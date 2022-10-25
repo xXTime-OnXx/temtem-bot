@@ -1,11 +1,9 @@
-from windowmanager import WindowManager
 from command.command import Command
+from controls import Controls
 
 class TemtemBot:
-    def __init__(self):
-        self.window_manager = WindowManager()
-        self.window_manager.find_window_wildcard(".*Temtem.*")
-        self.window_manager.set_foreground()
+    def __init__(self, game):
+        self._game = game
         self._controls = Controls()
 
     def execute(self, command: Command):

@@ -19,7 +19,7 @@ class Controls:
         win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP, 0, 0)
 
     def keyUp(self, key: Key):
-        pag.keyUp(key)
+        pag.keyUp(key.value)
 
     def keyDown(self, key: Key):
-        pag.keyDown(key)
+        pag.keyDown(key.value)

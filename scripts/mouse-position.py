@@ -28,3 +28,7 @@ print(pag.displayMousePosition())
 
 # RGB of Jumpable
 # (55, 156, 167)
+
+# Left Temtem Health RGB at X: 2135, Y: 164
+# Right/Single Temtem Health RGB at X: 2200, Y: 190
+# (28, 209, 211)

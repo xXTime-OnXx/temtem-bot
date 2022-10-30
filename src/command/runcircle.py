@@ -2,12 +2,13 @@ import time
 
 from command.command import Command
 from controls import Controls, Key
+from game.game import Game, GameStatus
 
 class RunCircle(Command):
 
-    def execute(self, controls: Controls):
+    def execute(self, controls: Controls, game: Game):
         print('Command RunCircle')
-        while True:
+        while game.status() is GameStatus.OPEN_WORLD:
             controls.keyDown(Key.UP)
             controls.keyUp(Key.RIGHT)
             time.sleep(0.1)
@@ -20,3 +21,4 @@ class RunCircle(Command):
             controls.keyDown(Key.RIGHT)
             controls.keyUp(Key.DOWN)
             time.sleep(0.1)
+        controls.reset()

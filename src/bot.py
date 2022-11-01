@@ -1,5 +1,5 @@
 from command.command import Command
-from controls import Controls
+from utils.controls import Controls
 from game.game import Game
 
 class TemtemBot:

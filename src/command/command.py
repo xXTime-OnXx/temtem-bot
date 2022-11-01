@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from controls import Controls
+from utils.controls import Controls
 from game.game import Game
 
 class Command(ABC):

@@ -10,5 +10,4 @@ class CatchRelease(Command):
     def execute(self, controls: Controls, game: Game):
         print('Command CatchRelease')
         battle = game.get_battle()
-        battle.select_moves(Move.ATTACK_ONE)
         controls.reset()

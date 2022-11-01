@@ -1,6 +1,7 @@
 from typing import Literal
 import pyautogui as pag
 from game.battle.battlestate import BattleState
+from game.battle.chooseoption import ChooseOption
 
 from game.move import Move
 
@@ -10,14 +11,15 @@ from game.move import Move
 
 class Battle:
 
-    _TARGETS: Literal = Literal['left', 'right']
+    _TARGETS: Literal = Literal['left', 'single', 'right']
 
     STAMINA_RGB = (28, 209, 211)
     USED_STAMINA_RGB = (28, 99, 99)
 
     def __init__(self) -> None:
-        self.setBattle() # set beginning state
-        pass
+        self.setBattle(ChooseOption())
+        self.setTargets()
+        self.setAllies()
 
     def setBattle(self, state: BattleState) -> None:
         self._state = state

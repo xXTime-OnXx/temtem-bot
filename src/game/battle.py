@@ -1,37 +1,42 @@
-from typing import Literal
-import pyautogui as pag
 from game.battle.battlestate import BattleState
+from game.battle.battleutils import BattleUtils
 from game.battle.chooseoption import ChooseOption
+from game.battle.temtem import TemtemPosition
 
-from game.move import Move
-
-# Left Temtem Health RGB at X: 2135, Y: 164
-# Right/Single Temtem Health RGB at X: 2200, Y: 190
-# (28, 209, 211)
 
 class Battle:
 
-    _TARGETS: Literal = Literal['left', 'single', 'right']
-
-    STAMINA_RGB = (28, 209, 211)
-    USED_STAMINA_RGB = (28, 99, 99)
-
     def __init__(self) -> None:
         self.setBattle(ChooseOption())
-        self.setTargets()
+        self.setEnemies()
         self.setAllies()
 
     def setBattle(self, state: BattleState) -> None:
         self._state = state
         self._state.battle = self
 
+    def setEnemies(self) -> None:
+        self._enemies = {}
+        leftEnemy = BattleUtils.getLeftEnemy()
+        if leftEnemy is None:
+            self._enemies.update({TemtemPosition.SINGLE: BattleUtils.getRightEnemy()})
+            return
+        self._enemies.update({TemtemPosition.LEFT: leftEnemy})
+        self._enemies.update({TemtemPosition.RIGHT: BattleUtils.getRightEnemy})
+
+    def setAllies(self) -> None:
+        self._allies = {}
+        leftEnemy = BattleUtils.getLeftEnemy()
+        self._enemies.update({TemtemPosition.LEFT: leftEnemy})
+        self._enemies.update({TemtemPosition.RIGHT: BattleUtils.getRightEnemy})
+
     def presentState(self) -> BattleState:
         return self._state
 
-    def useTechnique(self, technique: int, target: _TARGETS) -> None:
+    def useTechnique(self, technique: int, target: TemtemPosition) -> None:
         self._state.useTechnique(technique, target)
 
-    def useTemCard(self, target: _TARGETS) -> None:
+    def useTemCard(self, target: TemtemPosition) -> None:
         self._state.useTemCard(target)
     
     def temdeck(self) -> None:
@@ -42,5 +47,4 @@ class Battle:
 
     @staticmethod
     def isPresent() -> bool:
-        right_temtem_stamina = pag.pixel(2200, 190)
-        return right_temtem_stamina == Battle.STAMINA_RGB or right_temtem_stamina == Battle.USED_STAMINA_RGB
+        return BattleUtils.getRightEnemy() is not None
